@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+  mysql-d3ta-go:
+    image: "docker.io/bitnami/mysql:5.7-debian-10"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "mysql_data_d3ta_go:/bitnami/mysql/data"
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: ["CMD", "/opt/bitnami/scripts/mysql/healthcheck.sh"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+volumes:
+  mysql_data_d3ta_go:
+    driver: local
